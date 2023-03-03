@@ -5,31 +5,19 @@ using namespace std;
 
 double f(double x)
 {
-    return 0.5 * exp(-sqrt(x)) - 0.2 * sqrt(x * x * x) + 2;
+    return exp(-sqrt(x)) / 2 - 0.2 * sqrt(x * x * x) + 2;
 }
 
-double findRoot(double (*f)(double), double a, double b,
-                double eps = 0.001)
+double findRoot(double a, double b, double epsilon)
 {
-    double t;
-    while (fabs(b - a) >= eps)
+    int i = 0;
+    while (fabs(b - a) > epsilon)
     {
-        t = a + (f(b) * (b - a)) / (f(b) - f(a));
-
-        if (f(a) * f(t) < 0)
-        {
-            b = t;
-        }
-        else if (f(t) * f(b) < 0)
-        {
-            a = t;
-        }
-        else
-        {
-            return t;
-        }
+        a = b - (b - a) * f(b) / (f(b) - f(a));
+        b = a - (a - b) * f(a) / (f(a) - f(b));
+        i++;
     }
-    return t;
+    return b;
 }
 
 int main()
@@ -40,7 +28,7 @@ int main()
     cin >> a;
     cout << "(right limit) b = ";
     cin >> b;
-    double t = findRoot(f, a, b);
+    double t = findRoot(a, b, 0.001);
     cout << "x = " << t << "\nf(x) = " << f(t) << endl;
     return 0;
 }
