@@ -36,11 +36,11 @@ int main()
 {
     cout.setf(ios::fixed);
     double a, b;
-    cout << "\nEnter the limits,\n\nLeft limit,a= ";
+    cout << "Enter the limits:\n(left limit) a = ";
     cin >> a;
-    cout << "\nRight limit,b= ";
+    cout << "(right limit) b = ";
     cin >> b;
-    double t = findRoot(f);
-    cout << "x=" << t << "f(x)=" << f(t) << endl;
+    double t = findRoot(f, a, b);
+    cout << "x = " << t << "\nf(x) = " << f(t) << endl;
     return 0;
 }
