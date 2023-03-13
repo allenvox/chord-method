@@ -17,6 +17,7 @@ double findRoot(double a, double b, double epsilon)
         b = a - (a - b) * f(a) / (f(a) - f(b));
         i++;
     }
+    cout << i << " iterations done" << endl;
     return b;
 }
 
